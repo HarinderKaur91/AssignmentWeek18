@@ -16,11 +16,9 @@ public class MyWishListPage extends TestBase {
 
 	@FindBy(css = "tbody tr:last-of-type td:last-of-type a")
 	WebElement deleteButton;
-	
-	
+
 	@FindBy(css = "div.alert-success")
 	WebElement successBannerAfterDelete;
-	
 
 	public WebElement getElementFromTheTable(String productName, WishList column) {
 
@@ -31,9 +29,9 @@ public class MyWishListPage extends TestBase {
 
 		for (int i = 0; i < rowsInTable.size(); i++) {
 			List<WebElement> cells = rowsInTable.get(i).findElements(By.cssSelector("td"));
-			
+
 			String productNameText = cells.get(1).getText();
-			
+
 			if (productNameText.equals(productName)) {
 				return cells.get(columnIndex);
 			}
@@ -57,16 +55,14 @@ public class MyWishListPage extends TestBase {
 		return -1;
 	}
 
-	public void deleteLastProductInWishList() {
-		deleteButton.click();
-	}
 	public String getTextFromSuccessBannerAfterDelete() {
 		return successBannerAfterDelete.getText();
 	}
 
 	public enum WishList {
 
-		PRODUCTNAME("Product Name"), MODEL("Model"), STOCK("Stock"), UNITPRICE("Unit Price");
+		IMAGE("Image"), PRODUCTNAME("Product Name"), MODEL("Model"), STOCK("Stock"), UNITPRICE("Unit Price"),
+		ACTION("Action");
 
 		String name;
 
@@ -77,5 +73,9 @@ public class MyWishListPage extends TestBase {
 		public String getName() {
 			return name;
 		}
+	}
+
+	public void deleteProductInWishList(String productName, WishList column, By locator) {
+		getElementFromTheTable(productName, column).findElement(locator).click();
 	}
 }

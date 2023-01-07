@@ -33,27 +33,32 @@ public class LaptopsAndNotebooksTest extends TestBase {
 	}
 
 	@Test
-	public void validateSuccesBannerAfterAddingProductsToWishlist() {
+	public void validateLaptopsAndNotebooksPage() {
 
 		myAccountPage.hoverOnLaptopAndNotebooks();
 		LaptopsAndNotebooksPage laptopsAndNotebooksPage = myAccountPage.clickShowAllLaptops();
 		
+		//Selecting sorting technique
 		laptopsAndNotebooksPage.selectSortingMethodFromDropDown();
+		
+		//Adding products to the wishlist
 		laptopsAndNotebooksPage.addToWishlistFirstLaptop();
 		laptopsAndNotebooksPage.addToWishlistSecondLaptop();
 		laptopsAndNotebooksPage.addToWishlistThirdLaptop();
 		
-		System.out.println(laptopsAndNotebooksPage.getTextFromSuccesBanner());
+		//Validating success banner
 		softAssert.assertEquals(laptopsAndNotebooksPage.getTextFromSuccesBanner(),
 				"Success: You have added "+laptopsAndNotebooksPage.getProductNameInSuccessBanner()+ " to your "+laptopsAndNotebooksPage.getWishListInSuccessBanner()+"!\n×", "Text on success banner doesn't match");
-
+		
+		//Validating heading text of laptops page
 		softAssert.assertEquals(laptopsAndNotebooksPage.getLaptopsAndNotebooksHeadingText(), "Laptops & Notebooks",
 				"Text doesn't match");
+		
+		//Validating title of laptops page
 		softAssert.assertEquals(driver.getTitle(), "Laptops & Notebooks", "Title doesn't match");
 		laptopsAndNotebooksPage.clickWishlistLink();
 		softAssert.assertAll();
-		
-
+	
 	}
 
 	@AfterMethod

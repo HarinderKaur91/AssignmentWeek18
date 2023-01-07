@@ -1,6 +1,6 @@
 package com.naveenautomation.Tests;
 
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.By;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -34,38 +34,39 @@ public class MyWishListTest extends TestBase {
 
 	@Test
 	public void validateTitle() {
+		// validating title of my wishlist page
 		softAssert.assertEquals(driver.getTitle(), "My Wish List", "Title doesn't match");
 		softAssert.assertAll();
 	}
 
 	@Test(priority = 1)
 	public void verifyProductName() {
-		WebElement nameElement1 = myWishListPage.getElementFromTheTable("MacBook Air", WishList.PRODUCTNAME);
-		WebElement nameElement2 = myWishListPage.getElementFromTheTable("MacBook Pro", WishList.PRODUCTNAME);
-		WebElement nameElement3 = myWishListPage.getElementFromTheTable("Sony VAIO", WishList.PRODUCTNAME);
-
-		softAssert.assertEquals(nameElement1.getText(), "MacBook Air", "Product1 name doesn't match");
-		softAssert.assertEquals(nameElement2.getText(), "MacBook Pro", "Product2 name doesn't match");
-		softAssert.assertEquals(nameElement3.getText(), "Sony VAIO", "Product3 name doesn't match");
+		// validating names of products added to wishlist
+		softAssert.assertEquals(myWishListPage.getElementFromTheTable("MacBook Air", WishList.PRODUCTNAME).getText(),
+				"MacBook Air", "Product1 name doesn't match");
+		softAssert.assertEquals(myWishListPage.getElementFromTheTable("MacBook Pro", WishList.PRODUCTNAME).getText(),
+				"MacBook Pro", "Product2 name doesn't match");
+		softAssert.assertEquals(myWishListPage.getElementFromTheTable("Sony VAIO", WishList.PRODUCTNAME).getText(),
+				"Sony VAIO", "Product3 name doesn't match");
 		softAssert.assertAll();
 	}
 
 	@Test(priority = 2)
 	public void verifyProductPrice() {
-		WebElement priceElement1 = myWishListPage.getElementFromTheTable("MacBook Air", WishList.UNITPRICE);
-		WebElement priceElement2 = myWishListPage.getElementFromTheTable("MacBook Pro", WishList.UNITPRICE);
-		WebElement priceElement3 = myWishListPage.getElementFromTheTable("Sony VAIO", WishList.UNITPRICE);
-
-		softAssert.assertEquals(priceElement1.getText(), "$1,202.00", "Price for product1 doesn't match");
-		softAssert.assertEquals(priceElement2.getText(), "$2,000.00", "Price for product2 doesn't match");
-		softAssert.assertEquals(priceElement3.getText(), "$1,202.00", "Price for product3 doesn't match");
+		// validating price of products added to wishlist
+		softAssert.assertEquals(myWishListPage.getElementFromTheTable("MacBook Air", WishList.UNITPRICE).getText(),
+				"$1,202.00", "Price for product1 doesn't match");
+		softAssert.assertEquals(myWishListPage.getElementFromTheTable("MacBook Pro", WishList.UNITPRICE).getText(),
+				"$2,000.00", "Price for product2 doesn't match");
+		softAssert.assertEquals(myWishListPage.getElementFromTheTable("Sony VAIO", WishList.UNITPRICE).getText(),
+				"$1,202.00", "Price for product3 doesn't match");
 		softAssert.assertAll();
 	}
 
 	@Test(priority = 3)
 	public void verifyModifyBannerAfterDelete() {
-		
-		myWishListPage.deleteLastProductInWishList();
+		// Deleting last product and validating delete banner success
+		myWishListPage.deleteProductInWishList("MacBook Pro",WishList.ACTION,By.cssSelector("a"));
 		softAssert.assertEquals(myWishListPage.getTextFromSuccessBannerAfterDelete(),
 				"Success: You have modified your wish list!\n×", "Element not deleted");
 		softAssert.assertAll();

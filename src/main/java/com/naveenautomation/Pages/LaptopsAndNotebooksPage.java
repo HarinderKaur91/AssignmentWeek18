@@ -37,15 +37,14 @@ public class LaptopsAndNotebooksPage extends TestBase {
 
 	@FindBy(css = "div.alert-success a:last-of-type")
 	WebElement wishListInSuccessBanner;
-	
+
 	@FindBy(css = "ul.list-inline>li:nth-of-type(3) span")
 	WebElement wishListLink;
-	
+
 	public String getLaptopsAndNotebooksHeadingText() {
 		return laptopsAndNotebboksText.getText();
 	}
-	
-	
+
 	public void selectSortingMethodFromDropDown() {
 		Select sc = new Select(sortByDropDown);
 		sc.selectByVisibleText("Rating (Highest)");
@@ -64,7 +63,6 @@ public class LaptopsAndNotebooksPage extends TestBase {
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -80,6 +78,7 @@ public class LaptopsAndNotebooksPage extends TestBase {
 	public String getWishListInSuccessBanner() {
 		return wishListInSuccessBanner.getText();
 	}
+
 	public MyWishListPage clickWishlistLink() {
 		wishListLink.click();
 		return new MyWishListPage();

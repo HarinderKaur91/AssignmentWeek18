@@ -23,6 +23,9 @@ public class MyAccountPage extends TestBase {
 	@FindBy(css = "ul li.dropdown:nth-of-type(2) a.see-all")
 	WebElement showAllLaptops;
 
+	@FindBy(css = "div.list-group a:nth-of-type(4)")
+	WebElement addressBookLink;
+	
 	public String getMyAccountText() {
 		return myAccountText.getText();
 	}
@@ -35,7 +38,10 @@ public class MyAccountPage extends TestBase {
 		showAllLaptops.click();
 		return new LaptopsAndNotebooksPage();		
 	}
-	
+	public AddressBookPage clickAddressBookLink() {
+		addressBookLink.click();
+		return new AddressBookPage();
+	}
 	
 
 }
